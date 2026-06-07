@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://script/data/character_data.gd" id="1_c005"]
+
+[resource]
+script = ExtResource("1_c005")
+character_name = "江辰"
+age = 16
+gender = 0
+faction = 3
+max_health = 96.0
+current_health = 96.0
+max_stamina = 87.0
+current_stamina = 87.0
+max_mana = 100.0
+current_mana = 100.0
+move_speed = 219.0
+agility = 15.0
+attack = 12.0
+defense = 7.0
+crit_rate = 0.15

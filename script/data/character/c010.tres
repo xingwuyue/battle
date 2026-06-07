@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://script/data/character_data.gd" id="1_c010"]
+
+[resource]
+script = ExtResource("1_c010")
+character_name = "宋听澜"
+age = 18
+gender = 1
+faction = 1
+max_health = 116.0
+current_health = 116.0
+max_stamina = 118.0
+current_stamina = 118.0
+max_mana = 105.0
+current_mana = 105.0
+move_speed = 197.0
+agility = 12.0
+attack = 11.0
+defense = 9.0
+crit_rate = 0.14

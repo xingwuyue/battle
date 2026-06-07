@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://be77wr57asjex"]
+
+[ext_resource type="Texture2D" uid="uid://c4ymgbxru8x04" path="res://asset/spritesheet/character/shadow.png" id="1_8h7u3"]
+[ext_resource type="SpriteFrames" uid="uid://dw6l1x4xny61s" path="res://asset/animation/c002.tres" id="1_8rycp"]
+[ext_resource type="Script" uid="uid://dqy4q6egiurk3" path="res://script/character/character.gd" id="3_vfk2m"]
+[ext_resource type="Resource" uid="uid://dng5e3g4kollq" path="res://script/data/character/c001.tres" id="4_0gprl"]
+[ext_resource type="Script" uid="uid://uqepjuqcel42" path="res://script/state_machine/state_machine.gd" id="5_xqyux"]
+[ext_resource type="Script" uid="uid://d03ouykiw5tx7" path="res://script/animation/animation_manager.gd" id="6_q4551"]
+[ext_resource type="Script" uid="uid://dda1frbl4gc0n" path="res://script/state_machine/states/idle.gd" id="6_yq2el"]
+[ext_resource type="Script" uid="uid://dl36h8koxfffw" path="res://script/controllers/player_controller.gd" id="7_etibf"]
+[ext_resource type="Script" uid="uid://k7wokiesakid" path="res://script/state_machine/states/move.gd" id="7_k8bap"]
+[ext_resource type="Script" uid="uid://2p3ag7me4vuc" path="res://script/state_machine/states/jump.gd" id="8_nnd12"]
+[ext_resource type="Script" uid="uid://ycbheg4nkpq0" path="res://script/state_machine/states/attack.gd" id="9_fxtxn"]
+[ext_resource type="Script" uid="uid://g7kw6bjt6vrf" path="res://script/state_machine/states/defend.gd" id="10_5d25w"]
+[ext_resource type="Script" uid="uid://dtd6ku2mshulr" path="res://script/state_machine/states/hit.gd" id="11_h1v51"]
+[ext_resource type="Script" uid="uid://k8v1qiv5mrnv" path="res://script/state_machine/states/pickup.gd" id="12_x0rfc"]
+[ext_resource type="Script" uid="uid://b3a3c3r0hb8mr" path="res://script/state_machine/states/interaction.gd" id="13_5qwxm"]
+[ext_resource type="Script" uid="uid://ctco844jq1p6x" path="res://script/state_machine/states/tool.gd" id="14_e7cfv"]
+[ext_resource type="Script" uid="uid://2rioq3krseym" path="res://script/state_machine/states/die.gd" id="15_3nuoq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7lha7"]
+radius = 48.0
+height = 200.0
+
+[sub_resource type="Animation" id="Animation_8q7x6"]
+resource_name = "jump_motion"
+length = 0.8666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualRoot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.33333334, 0.4, 0.6, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -100), Vector2(0, -100), Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1l7ku"]
+_data = {
+&"jump_motion": SubResource("Animation_8q7x6")
+}
+
+[node name="C001" type="CharacterBody2D" unique_id=168303565]
+script = ExtResource("3_vfk2m")
+data = ExtResource("4_0gprl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1331348208]
+modulate = Color(1, 1, 1, 0.62352943)
+position = Vector2(0, 87.265)
+scale = Vector2(0.54, 0.155)
+texture = ExtResource("1_8h7u3")
+
+[node name="VisualRoot" type="Node2D" parent="." unique_id=1414043656]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VisualRoot" unique_id=1729424003]
+sprite_frames = ExtResource("1_8rycp")
+animation = &"walk"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1707913552]
+shape = SubResource("CapsuleShape2D_7lha7")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1290963167 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_xqyux")
+initial_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="StateMachine" unique_id=262391301]
+script = ExtResource("6_yq2el")
+
+[node name="move" type="Node" parent="StateMachine" unique_id=48719678]
+script = ExtResource("7_k8bap")
+
+[node name="jump" type="Node" parent="StateMachine" unique_id=59687087]
+script = ExtResource("8_nnd12")
+
+[node name="attack" type="Node" parent="StateMachine" unique_id=1797922726]
+script = ExtResource("9_fxtxn")
+
+[node name="defend" type="Node" parent="StateMachine" unique_id=355865385]
+script = ExtResource("10_5d25w")
+
+[node name="hit" type="Node" parent="StateMachine" unique_id=290560732]
+script = ExtResource("11_h1v51")
+
+[node name="pickup" type="Node" parent="StateMachine" unique_id=1925662423]
+script = ExtResource("12_x0rfc")
+
+[node name="interaction" type="Node" parent="StateMachine" unique_id=1211834502]
+script = ExtResource("13_5qwxm")
+
+[node name="tool" type="Node" parent="StateMachine" unique_id=1049689914]
+script = ExtResource("14_e7cfv")
+
+[node name="die" type="Node" parent="StateMachine" unique_id=2101858287]
+script = ExtResource("15_3nuoq")
+
+[node name="AnimationManager" type="Node" parent="." unique_id=141599882 node_paths=PackedStringArray("animated_sprite")]
+script = ExtResource("6_q4551")
+animated_sprite = NodePath("../VisualRoot/AnimatedSprite2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1572596080]
+libraries/ = SubResource("AnimationLibrary_1l7ku")
+
+[node name="PlayerController" type="Node" parent="." unique_id=1967838823]
+script = ExtResource("7_etibf")

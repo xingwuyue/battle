@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://script/data/character_data.gd" id="1_c007"]
+
+[resource]
+script = ExtResource("1_c007")
+character_name = "陆行舟"
+age = 18
+gender = 0
+faction = 1
+max_health = 92.0
+current_health = 92.0
+max_stamina = 80.0
+current_stamina = 80.0
+max_mana = 117.0
+current_mana = 117.0
+move_speed = 216.0
+agility = 12.0
+attack = 8.0
+defense = 9.0
+crit_rate = 0.13

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://script/data/character_data.gd" id="1_c009"]
+
+[resource]
+script = ExtResource("1_c009")
+character_name = "秦书淮"
+age = 17
+gender = 0
+faction = 2
+max_health = 127.0
+current_health = 127.0
+max_stamina = 81.0
+current_stamina = 81.0
+max_mana = 88.0
+current_mana = 88.0
+move_speed = 250.0
+agility = 11.0
+attack = 12.0
+defense = 5.0
+crit_rate = 0.11

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://dng5e3g4kollq"]
+
+[ext_resource type="Script" uid="uid://ckby0vy6f0bwv" path="res://script/data/character_data.gd" id="1_c001"]
+
+[resource]
+script = ExtResource("1_c001")
+character_name = "林逸"
+age = 17
+faction = 0
+max_health = 120.0
+current_health = 120.0
+max_stamina = 120.0
+current_stamina = 120.0
+max_mana = 117.0
+current_mana = 117.0
+move_speed = 218.0
+agility = 11.0
+attack = 13.0
+defense = 4.0
+crit_rate = 0.1

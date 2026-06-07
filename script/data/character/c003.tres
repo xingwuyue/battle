@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://script/data/character_data.gd" id="1_c003"]
+
+[resource]
+script = ExtResource("1_c003")
+character_name = "顾言"
+age = 16
+gender = 0
+faction = 2
+max_health = 100.0
+current_health = 100.0
+max_stamina = 91.0
+current_stamina = 91.0
+max_mana = 105.0
+current_mana = 105.0
+move_speed = 240.0
+agility = 10.0
+attack = 13.0
+defense = 10.0
+crit_rate = 0.13

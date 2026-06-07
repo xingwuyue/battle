@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://script/data/character_data.gd" id="1_c004"]
+
+[resource]
+script = ExtResource("1_c004")
+character_name = "苏晚晴"
+age = 18
+gender = 1
+faction = 3
+max_health = 97.0
+current_health = 97.0
+max_stamina = 107.0
+current_stamina = 107.0
+max_mana = 81.0
+current_mana = 81.0
+move_speed = 237.0
+agility = 15.0
+attack = 12.0
+defense = 4.0
+crit_rate = 0.11
