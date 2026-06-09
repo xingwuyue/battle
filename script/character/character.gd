@@ -4,6 +4,10 @@
 class_name Character
 extends CharacterBody2D
 
+# 预加载招式系统脚本，避免类型分析器无法解析新类
+const PlayerMoveSet = preload("res://script/data/player_move/player_move_set.gd")
+const PlayerMoveData = preload("res://script/data/player_move/player_move_data.gd")
+
 # 角色数据资源，包含角色的属性配置（如移动速度等）
 @export var data: CharacterData
 # 视觉动画组
@@ -118,7 +122,7 @@ func try_consume_buffered_command() -> bool:
 	if _buffered_command == &"" or not state_machine or not player_move_set:
 		return false
 
-	var move := resolve_move_for_command(_buffered_command)
+	var move: PlayerMoveData = resolve_move_for_command(_buffered_command)
 	if not move:
 		return false
 
@@ -194,7 +198,7 @@ func get_current_move_id() -> StringName:
 func get_current_move_phase() -> StringName:
 	if not _current_move or _current_move_duration <= 0.0:
 		return &""
-	var progress := clamp(_current_move_elapsed / _current_move_duration, 0.0, 1.0)
+	var progress: float = clampf(_current_move_elapsed / _current_move_duration, 0.0, 1.0)
 	return _current_move.get_phase_at_progress(progress)
 
 # 进入一个新招式
@@ -204,11 +208,11 @@ func enter_action(msg: Dictionary = {}) -> bool:
 	if not player_move_set:
 		return false
 
-	var move_id := StringName(str(msg.get("move_id", "")))
+	var move_id: StringName = StringName(str(msg.get("move_id", "")))
 	if move_id == &"":
 		return false
 
-	var move := player_move_set.get_move_by_id(move_id)
+	var move: PlayerMoveData = player_move_set.get_move_by_id(move_id)
 	if not move:
 		return false
 
@@ -263,15 +267,15 @@ func _apply_current_move_root_motion(delta: float) -> void:
 		velocity = Vector2.ZERO
 		return
 
-	var progress := clamp(_current_move_elapsed / max(_current_move_duration, 0.01), 0.0, 1.0)
-	var motion := _current_move.root_motion_curve.sample(progress)
+	var progress: float = clampf(_current_move_elapsed / maxf(_current_move_duration, 0.01), 0.0, 1.0)
+	var motion: Vector2 = _current_move.root_motion_curve.sample(progress)
 	if _current_move.root_motion_curve.apply_facing and animation_manager and animation_manager.animated_sprite:
 		if animation_manager.animated_sprite.flip_h:
 			motion.x = -motion.x
 
-	var delta_motion := motion - _current_move_last_motion
+	var delta_motion: Vector2 = motion - _current_move_last_motion
 	_current_move_last_motion = motion
-	velocity = delta_motion / max(delta, 0.0001)
+	velocity = delta_motion / maxf(delta, 0.0001)
 
 # 处理移动输入
 # 参数 direction: 移动方向向量
@@ -414,6 +418,6 @@ func _update_shadow_scale() -> void:
 	if visual_root:
 		height = max(0.0, _visual_root_origin.y - visual_root.position.y)
 
-	var ratio := clamp(height / max(shadow_height_for_min_scale, 0.001), 0.0, 1.0)
-	var scale_factor := lerp(1.0, shadow_min_scale_ratio, ratio)
+	var ratio: float = clampf(height / maxf(shadow_height_for_min_scale, 0.001), 0.0, 1.0)
+	var scale_factor: float = lerpf(1.0, shadow_min_scale_ratio, ratio)
 	shadow.scale = _shadow_origin_scale * scale_factor

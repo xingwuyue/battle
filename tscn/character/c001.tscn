@@ -4,13 +4,14 @@
 [ext_resource type="SpriteFrames" uid="uid://dw6l1x4xny61s" path="res://asset/animation/c002.tres" id="1_8rycp"]
 [ext_resource type="Script" uid="uid://dqy4q6egiurk3" path="res://script/character/character.gd" id="3_vfk2m"]
 [ext_resource type="Resource" uid="uid://dng5e3g4kollq" path="res://script/data/character/c001.tres" id="4_0gprl"]
+[ext_resource type="Resource" path="res://script/data/player_move/c001/c001_player_move_set.tres" id="4_move_set"]
 [ext_resource type="Script" uid="uid://uqepjuqcel42" path="res://script/state_machine/state_machine.gd" id="5_xqyux"]
 [ext_resource type="Script" uid="uid://d03ouykiw5tx7" path="res://script/animation/animation_manager.gd" id="6_q4551"]
 [ext_resource type="Script" uid="uid://dda1frbl4gc0n" path="res://script/state_machine/states/idle.gd" id="6_yq2el"]
 [ext_resource type="Script" uid="uid://dl36h8koxfffw" path="res://script/controllers/player_controller.gd" id="7_etibf"]
 [ext_resource type="Script" uid="uid://k7wokiesakid" path="res://script/state_machine/states/move.gd" id="7_k8bap"]
 [ext_resource type="Script" uid="uid://2p3ag7me4vuc" path="res://script/state_machine/states/jump.gd" id="8_nnd12"]
-[ext_resource type="Script" uid="uid://ycbheg4nkpq0" path="res://script/state_machine/states/attack.gd" id="9_fxtxn"]
+[ext_resource type="Script" path="res://script/state_machine/states/action.gd" id="9_action"]
 [ext_resource type="Script" uid="uid://g7kw6bjt6vrf" path="res://script/state_machine/states/defend.gd" id="10_5d25w"]
 [ext_resource type="Script" uid="uid://dtd6ku2mshulr" path="res://script/state_machine/states/hit.gd" id="11_h1v51"]
 [ext_resource type="Script" uid="uid://k8v1qiv5mrnv" path="res://script/state_machine/states/pickup.gd" id="12_x0rfc"]
@@ -46,8 +47,9 @@ _data = {
 [node name="C001" type="CharacterBody2D" unique_id=168303565]
 script = ExtResource("3_vfk2m")
 data = ExtResource("4_0gprl")
+player_move_set = ExtResource("4_move_set")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1331348208]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1331348208]
 modulate = Color(1, 1, 1, 0.62352943)
 position = Vector2(0, 87.265)
 scale = Vector2(0.54, 0.155)
@@ -76,8 +78,8 @@ script = ExtResource("7_k8bap")
 [node name="jump" type="Node" parent="StateMachine" unique_id=59687087]
 script = ExtResource("8_nnd12")
 
-[node name="attack" type="Node" parent="StateMachine" unique_id=1797922726]
-script = ExtResource("9_fxtxn")
+[node name="action" type="Node" parent="StateMachine" unique_id=1797922726]
+script = ExtResource("9_action")
 
 [node name="defend" type="Node" parent="StateMachine" unique_id=355865385]
 script = ExtResource("10_5d25w")
