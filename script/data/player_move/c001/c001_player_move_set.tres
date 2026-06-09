@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerMoveSet" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://script/data/player_move/player_move_set.gd" id="1_set"]
+[ext_resource type="Resource" path="res://script/data/player_move/c001/attack001.tres" id="2_attack001"]
+[ext_resource type="Resource" path="res://script/data/player_move/c001/attack002.tres" id="3_attack002"]
+[ext_resource type="Resource" path="res://script/data/player_move/c001/sprint001.tres" id="4_sprint001"]
+
+[resource]
+script = ExtResource("1_set")
+moves = [ExtResource("2_attack001"), ExtResource("3_attack002"), ExtResource("4_sprint001")]

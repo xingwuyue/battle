@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="PlayerMoveData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://script/data/player_move/player_move_data.gd" id="1_move"]
+[ext_resource type="Script" path="res://script/data/player_move/player_move_phase_window.gd" id="2_phase"]
+[ext_resource type="Resource" path="res://script/data/player_move/c001/sprint001_motion.tres" id="3_motion"]
+
+[sub_resource type="Resource" script_class="PlayerMovePhaseWindow" id="1_startup"]
+script = ExtResource("2_phase")
+phase_name = &"startup"
+start_ratio = 0.0
+end_ratio = 0.12
+
+[sub_resource type="Resource" script_class="PlayerMovePhaseWindow" id="2_active"]
+script = ExtResource("2_phase")
+phase_name = &"active"
+start_ratio = 0.12
+end_ratio = 0.5
+
+[sub_resource type="Resource" script_class="PlayerMovePhaseWindow" id="3_recovery"]
+script = ExtResource("2_phase")
+phase_name = &"recovery"
+start_ratio = 0.5
+end_ratio = 1.0
+
+[resource]
+script = ExtResource("1_move")
+move_id = &"sprint001"
+display_name = "Sprint 001"
+input_command = &"light_attack"
+priority = 80
+animation_name = &"attack001"
+required_state_tags = PackedStringArray("ground", "sprint")
+blocked_state_tags = PackedStringArray("air")
+root_motion_enabled = true
+root_motion_curve = ExtResource("3_motion")
+phase_windows = [SubResource("1_startup"), SubResource("2_active"), SubResource("3_recovery")]
+tags = PackedStringArray("ground_attack", "sprint_attack")
