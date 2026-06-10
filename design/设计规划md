@@ -36,7 +36,9 @@
 ## 行为状态机
 
 ### 状态列表
+环境状态：
 
+地面状态
 - `idle`
 - `attack`
 - `defend`
@@ -44,11 +46,26 @@
 - `pickup`
 - `interaction`
 - `tool`
+- `dash` (新增)
 - `die`
+空中状态
+- `idle`
+- `attack`
+- `hit`
+- `dash` (新增)
+- `die`
+
 
 ### 状态切换规则
 
-**默认状态**：idle、跳跃、移动中皆可切换到 `attack`、`defend`、`hit`、`pickup`、`tool`、`die`
+**默认状态**：idle、跳跃、移动中皆可切换到 `attack`、`defend`、`hit`、`pickup`、`tool`、`dash`、`die`
+
+#### 冲刺 (dash)
+
+- 按住 Shift + 移动键进入
+- 冲刺中松开 Shift 或速度降低则退出
+- 冲刺中可被 `hit`、`die` 打断
+- 冲刺中可切换到 `attack`、`jump` (AirState)
 
 #### 攻击 (attack)
 

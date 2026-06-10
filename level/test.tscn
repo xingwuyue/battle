@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dbh7sqg3msxlc"]
 
 [ext_resource type="Texture2D" uid="uid://3efybclel8vk" path="res://asset/sence/s001.png" id="1_8abgs"]
-[ext_resource type="PackedScene" uid="uid://be77wr57asjex" path="res://tscn/character/c001.tscn" id="2_sywkh"]
+[ext_resource type="PackedScene" uid="uid://bmsu3xw7afi22" path="res://tscn/character/c001.tscn" id="2_8abgs"]
 
 [node name="Test" type="Node2D" unique_id=2094546273]
 
@@ -10,5 +10,5 @@ texture = ExtResource("1_8abgs")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1057727764]
 
-[node name="C001" parent="." unique_id=168303565 instance=ExtResource("2_sywkh")]
-position = Vector2(-144, 162)
+[node name="C001" parent="." unique_id=1633605469 instance=ExtResource("2_8abgs")]
+position = Vector2(-292, 113)

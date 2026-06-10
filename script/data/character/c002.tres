@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://m3vjcks7mwi6"]
 
-[ext_resource type="Script" path="res://script/data/character_data.gd" id="1_c002"]
+[ext_resource type="Script" uid="uid://ckby0vy6f0bwv" path="res://script/data/character_data.gd" id="1_c002"]
 
 [resource]
 script = ExtResource("1_c002")
@@ -17,5 +17,4 @@ current_mana = 110.0
 move_speed = 247.0
 agility = 12.0
 attack = 13.0
-defense = 5.0
 crit_rate = 0.11

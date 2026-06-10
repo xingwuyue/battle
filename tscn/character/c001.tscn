@@ -4,6 +4,12 @@
 [ext_resource type="SpriteFrames" uid="uid://dw6l1x4xny61s" path="res://asset/animation/c001.tres" id="1_8rycp"]
 [ext_resource type="Script" uid="uid://dqy4q6egiurk3" path="res://script/character/character.gd" id="1_character"]
 [ext_resource type="Script" uid="uid://bpf0i3f4ig4un" path="res://script/character/player_controller.gd" id="3_bsute"]
+[ext_resource type="Script" uid="uid://bhc8jtmhhxrvs" path="res://script/ability/jump_ability.gd" id="4_jump_ability"]
+[ext_resource type="Script" uid="uid://byiklh4ofvuoe" path="res://script/state/state_machine.gd" id="4_state_machine"]
+[ext_resource type="Script" uid="uid://d0636nxm4t82h" path="res://script/ability/dash_ability.gd" id="5_dash_ability"]
+[ext_resource type="Script" uid="uid://na6ghc3ymal6" path="res://script/state/ground_state.gd" id="5_ground_state"]
+[ext_resource type="Script" uid="uid://b68qwbgi6w1w1" path="res://script/state/air_state.gd" id="6_air_state"]
+[ext_resource type="Script" uid="uid://dt5joj0soffvk" path="res://script/state/dash_state.gd" id="7_dash_state"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sxuol"]
 
@@ -13,19 +19,38 @@ script = ExtResource("1_character")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1499766769]
 shape = SubResource("CapsuleShape2D_sxuol")
 
-[node name="VisualRoot" type="Sprite2D" parent="." unique_id=1191709776]
-
-[node name="Shadow" type="Sprite2D" parent="VisualRoot" unique_id=2121525298]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=2121525298]
 modulate = Color(1, 1, 1, 0.6745098)
 position = Vector2(0, 138.475)
 scale = Vector2(0.805, 0.16)
 texture = ExtResource("1_8h7u3")
 
+[node name="VisualRoot" type="Sprite2D" parent="." unique_id=1191709776]
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VisualRoot" unique_id=204026130]
 sprite_frames = ExtResource("1_8rycp")
-animation = &"idle"
+animation = &"sprint"
 autoplay = "idle"
-frame_progress = 0.36518702
+frame_progress = 0.2924077
 
 [node name="PlayerController" type="Node" parent="." unique_id=712233460]
 script = ExtResource("3_bsute")
+
+[node name="JumpAbility" type="Node" parent="PlayerController" unique_id=1809475646]
+script = ExtResource("4_jump_ability")
+
+[node name="DashAbility" type="Node" parent="PlayerController" unique_id=1839319151]
+script = ExtResource("5_dash_ability")
+dash_speed_multiplier = 2.5
+
+[node name="StateMachine" type="Node" parent="." unique_id=690902195]
+script = ExtResource("4_state_machine")
+
+[node name="GroundState" type="Node" parent="StateMachine" unique_id=820771159]
+script = ExtResource("5_ground_state")
+
+[node name="AirState" type="Node" parent="StateMachine" unique_id=781994946]
+script = ExtResource("6_air_state")
+
+[node name="DashState" type="Node" parent="StateMachine" unique_id=1920253093]
+script = ExtResource("7_dash_state")

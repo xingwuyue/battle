@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="MoveRootMotionData" load_steps=2 format=3]
-
-[ext_resource type="Script" path="res://script/data/player_move/move_root_motion_data.gd" id="1_motion"]
-
-[resource]
-script = ExtResource("1_motion")
-apply_facing = true
-time_points = PackedFloat32Array(0, 0.35, 1)
-position_points = [Vector2(0, 0), Vector2(26, 0), Vector2(52, 0)]
