@@ -68,8 +68,8 @@ func should_keep_dashing() -> bool:
 	if not character:
 		return false
 	
-	# 只要松开 Shift，立刻退出
-	if not dash_pressed:
+	# 松开 Shift 或方向键，立刻退出冲刺。
+	if not dash_pressed or character.input_direction == Vector2.ZERO:
 		return false
 	
 	# 如果被打断（受击、死亡），退出
