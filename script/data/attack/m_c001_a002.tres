@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="MoveData" format=3 uid="uid://cqjxpjuay7e1y"]
+
+[ext_resource type="Script" uid="uid://cv5gjmoyvrqqq" path="res://script/data/move_data.gd" id="1_move_data"]
+[ext_resource type="Script" uid="uid://bbe4okuifaf4v" path="res://script/data/attack/frame_range_data.gd" id="2_frame_range"]
+[ext_resource type="Script" uid="uid://baif8bo4hkmrp" path="res://script/data/attack/movement_segment_data.gd" id="3_movement_segment"]
+
+[sub_resource type="Resource" id="FrameRangeData_active_1"]
+script = ExtResource("2_frame_range")
+start_frame = 3
+end_frame = 5
+
+[sub_resource type="Resource" id="FrameRangeData_active_2"]
+script = ExtResource("2_frame_range")
+start_frame = 6
+end_frame = 7
+
+[sub_resource type="Resource" id="MovementSegmentData_forward"]
+script = ExtResource("3_movement_segment")
+start_frame = 2
+end_frame = 6
+distance = 80.0
+
+[sub_resource type="Resource" id="FrameRangeData_recovery"]
+script = ExtResource("2_frame_range")
+start_frame = 8
+end_frame = 9
+
+[sub_resource type="Resource" id="FrameRangeData_startup"]
+script = ExtResource("2_frame_range")
+end_frame = 2
+
+[resource]
+script = ExtResource("1_move_data")
+move_id = "a002"
+move_name = "地面普攻2"
+animation_name = &"ground_combo_2"
+damage_multiplier = 1.15
+stamina_cost = 10.0
+total_frames = 10
+startup_frame_range = SubResource("FrameRangeData_startup")
+active_frame_ranges = Array[Resource]([SubResource("FrameRangeData_active_1"), SubResource("FrameRangeData_active_2")])
+recovery_frame_range = SubResource("FrameRangeData_recovery")
+movement_segments = Array[Resource]([SubResource("MovementSegmentData_forward")])
+hitbox_offset = Vector2(105, -110)
+hitbox_size = Vector2(130, 100)

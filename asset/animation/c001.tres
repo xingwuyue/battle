@@ -273,8 +273,8 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m3mfj")
 }],
-"loop": true,
-"name": &"attack001",
+"loop": false,
+"name": &"ground_combo_1",
 "speed": 15.0
 }, {
 "frames": [{
@@ -308,8 +308,8 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hwomo")
 }],
-"loop": true,
-"name": &"attack002",
+"loop": false,
+"name": &"ground_combo_2",
 "speed": 15.0
 }, {
 "frames": [{

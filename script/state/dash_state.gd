@@ -30,6 +30,12 @@ func exit() -> void:
 # 2. 若角色已经离地，则直接转空中状态
 # 3. 若 DashAbility 判断冲刺条件失效，则回地面状态
 func physics_update(_delta: float) -> void:
+	# 冲刺攻击入口优先于跳跃。
+	# 这样玩家在冲刺过程中按攻击，会优先触发冲刺攻击而不是先跳起。
+	if player_controller and player_controller.attack_ability and player_controller.attack_ability.try_prepare_attack_transition(&"dash", 0):
+		state_machine.transition_to("AttackState")
+		return
+
 	if player_controller and player_controller.jump_ability and player_controller.jump_ability.try_start_jump():
 		state_machine.transition_to("AirState")
 		return

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CharacterAttackSet" format=3 uid="uid://cnqfs1i51gvem"]
+
+[ext_resource type="Script" uid="uid://cafbltamp0iso" path="res://script/data/attack/character_attack_set.gd" id="1_attack_set"]
+[ext_resource type="Resource" uid="uid://ck2q2uyph7hut" path="res://script/data/attack/m_c001_a001.tres" id="2_move_a001"]
+[ext_resource type="Resource" uid="uid://cqjxpjuay7e1y" path="res://script/data/attack/m_c001_a002.tres" id="3_move_a002"]
+[ext_resource type="Resource" uid="uid://ci73iisx01ibv" path="res://script/data/attack/m_c001_a003.tres" id="4_move_a003"]
+[ext_resource type="Resource" uid="uid://bng4t27iyd6m3" path="res://script/data/attack/m_c001_dash_a001.tres" id="5_move_dash"]
+[ext_resource type="Resource" uid="uid://c6wvs88s65ont" path="res://script/data/attack/m_c001_air_a001.tres" id="6_move_air"]
+
+[resource]
+script = ExtResource("1_attack_set")
+ground_combo_moves = Array[Resource]([ExtResource("2_move_a001"), ExtResource("3_move_a002"), ExtResource("4_move_a003")])
+dash_attack_move = ExtResource("5_move_dash")
+air_attack_move = ExtResource("6_move_air")

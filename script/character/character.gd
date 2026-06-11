@@ -8,6 +8,10 @@ extends CharacterBody2D
 # 在编辑器中配置，用于初始化角色的各项属性
 @export var data: CharacterData
 
+# 角色攻击配置资源。
+# 该资源负责告诉角色：地面普攻链、冲刺攻击、空中攻击分别对应哪些招式资源。
+@export var attack_set: Resource
+
 # 高度系统重力。
 # 这是一个公共基础参数，不只服务跳跃，也可用于被打飞、浮空等高度变化表现。
 @export var height_gravity: float = 1200.0
@@ -37,6 +41,10 @@ var action_state: Core.ActionState = Core.ActionState.IDLE
 # 视觉根节点引用
 # 用于翻转角色朝向
 @onready var visual_root: Node2D = $VisualRoot
+
+# 攻击伤害盒节点。
+# 由 AttackState 在伤害帧内动态启用，用于做前方命中判定。
+@onready var attack_hitbox: Area2D = get_node_or_null("AttackHitbox")
 
 # 初始化函数
 # 在场景树节点就绪时调用，负责加载数据
@@ -107,3 +115,86 @@ func play_animation(anim_name: String) -> void:
 	if animated_sprite:
 		if animated_sprite.animation != anim_name or not animated_sprite.is_playing():
 			animated_sprite.play(anim_name)
+
+
+# 获取指定攻击入口下对应的招式资源。
+# 这里把角色攻击表的查找逻辑集中到 Character，
+# 这样 AttackAbility 和 AttackState 都不需要知道资源存储细节。
+func get_attack_move(variant: StringName, combo_index: int = 0) -> Resource:
+	if not attack_set:
+		return null
+
+	match variant:
+		&"ground":
+			if combo_index >= 0 and combo_index < attack_set.ground_combo_moves.size():
+				return attack_set.ground_combo_moves[combo_index]
+		&"dash":
+			return attack_set.dash_attack_move
+		&"air":
+			return attack_set.air_attack_move
+
+	return null
+
+
+# 当前是否有足够体力支付某个消耗。
+# 先做简单数值判断，后续若要接入 Buff、锁体力或无消耗状态，可在这里统一扩展。
+func can_consume_stamina(cost: float) -> bool:
+	if not data:
+		return false
+	return data.current_stamina >= max(cost, 0.0)
+
+
+# 扣除体力。
+# 扣除成功返回 true；若体力不足，则不修改当前体力并返回 false。
+func consume_stamina(cost: float) -> bool:
+	if not can_consume_stamina(cost):
+		return false
+
+	data.current_stamina = clamp(data.current_stamina - max(cost, 0.0), 0.0, data.max_stamina)
+	return true
+
+
+# 获取角色当前面向方向。
+# 约定朝右为 1，朝左为 -1。
+func get_facing_sign() -> float:
+	if not visual_root:
+		return 1.0
+	if visual_root.scale.x < 0.0:
+		return -1.0
+	return 1.0
+
+
+# 获取攻击伤害盒节点。
+func get_attack_hitbox() -> Area2D:
+	return attack_hitbox
+
+
+# 获取攻击伤害盒的碰撞形状节点。
+func get_attack_hitbox_shape() -> CollisionShape2D:
+	if not attack_hitbox:
+		return null
+	return attack_hitbox.get_node_or_null("CollisionShape2D")
+
+
+# 应用攻击位移。
+# 这里不走普通移动输入，而是直接基于角色朝向推进位置，
+# 用于表现招式中的上步、突进和前冲。
+func apply_attack_displacement(distance: float) -> void:
+	global_position.x += distance * get_facing_sign()
+
+
+# 对命中的目标应用伤害。
+# 初版先提供一个最小可用实现：
+# 1. 若目标实现了 take_damage()，优先走目标自己的接口。
+# 2. 否则若目标存在 CharacterData，则直接扣它的 current_health。
+func apply_damage_to_target(target: Node, damage: float) -> void:
+	if not target or damage <= 0.0:
+		return
+
+	if target.has_method("take_damage"):
+		target.call("take_damage", damage)
+		return
+
+	var target_data = target.get("data")
+	if target_data is CharacterData:
+		target_data.current_health = max(target_data.current_health - damage, 0.0)

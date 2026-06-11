@@ -21,5 +21,11 @@ func enter() -> void:
 # 空中状态当前只关心一件事：是否已经回到地面。
 # 当高度系统判定角色不再处于空中时，立即回到地面状态。
 func physics_update(_delta: float) -> void:
+	# 空中攻击入口。
+	# 角色处于空中时按下攻击，进入空中攻击招式。
+	if player_controller and player_controller.attack_ability and player_controller.attack_ability.try_prepare_attack_transition(&"air", 0):
+		state_machine.transition_to("AttackState")
+		return
+
 	if not character.is_airborne():
 		state_machine.transition_to("GroundState")

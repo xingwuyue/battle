@@ -28,5 +28,12 @@ func physics_update(_delta: float) -> void:
 		state_machine.transition_to("DashState")
 		return
 
+	# 地面攻击入口。
+	# 这里在普通地面状态下消费一次攻击请求，并把入口类型标记为 ground，
+	# 供 AttackState.enter() 决定当前应当起手哪一招。
+	if player_controller and player_controller.attack_ability and player_controller.attack_ability.try_prepare_attack_transition(&"ground", 0):
+		state_machine.transition_to("AttackState")
+		return
+
 	if character.is_airborne():
 		state_machine.transition_to("AirState")

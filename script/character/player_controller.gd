@@ -15,6 +15,10 @@ var character
 # 负责处理玩家主动冲刺输入与冲刺判定。
 @onready var dash_ability: DashAbility = $DashAbility
 
+# 攻击能力引用
+# 负责记录攻击按键，并为状态层提供进入攻击和续接连段的输入请求。
+@onready var attack_ability = $AttackAbility
+
 # 初始化函数
 # 在场景树节点就绪时调用，获取角色引用
 func _ready() -> void:
@@ -74,3 +78,6 @@ func _update_abilities_input() -> void:
 
 	if dash_ability:
 		dash_ability.capture_input()
+
+	if attack_ability:
+		attack_ability.capture_input()
