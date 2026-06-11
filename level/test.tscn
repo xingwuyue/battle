@@ -17,7 +17,6 @@ limit_right = 9999932
 limit_bottom = 350
 limit_smoothed = true
 script = ExtResource("3_main_camera")
-follow_speed = 15.0
 
 [node name="C001" parent="." unique_id=1633605469 instance=ExtResource("2_8abgs")]
 position = Vector2(-323, 227)
